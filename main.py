@@ -1,16 +1,19 @@
 # This is a sample Python script.
-import subprocess
 import sys
-import time
-
-from PySide6.QtWidgets import QWidget, QApplication
+import subprocess
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QVBoxLayout, QMessageBox
+from PySide6.QtCore import QTimer
 
 from Form import Ui_Form
 from loguru import logger
 
+from MShutdownDialog import MShutdownDialog
+
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
+
 class MUtil(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
@@ -25,10 +28,8 @@ class MUtil(QWidget, Ui_Form):
 
         # 等待 1 分钟（60 秒）
         logger.info("Waiting for 1 minute before shutting down...")
-        time.sleep(60)
-
-        # 执行关机命令
-        self.shutdown_system()
+        # 关机
+        self.shutdown_dialog = MShutdownDialog()
 
     def execute_commands(self):
         commands = [
